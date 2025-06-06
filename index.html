@@ -43,6 +43,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+    position: relative; /* necessário para z-index funcionar */
+  z-index: 0; /* ou maior */
 }
 
 .section-1 {
@@ -62,6 +64,8 @@ background-image: linear-gradient(to left bottom, #0c0819, #12143f, #131968, #16
   display: flex;
   justify-content: center;
   align-items: center;
+    z-index: 1;
+
 }
 
 .imagem-fixa {
@@ -98,10 +102,60 @@ background-image: linear-gradient(to left top, #0c0819, #12143f, #131968, #161d9
   transform: translateY(100%);
 }
 
+.container-info-particle {
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+#bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* ou -10, -100 */
+  pointer-events: none;
+}
+
+.slide-panels{
+    flex: 0 0 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: white;
+}
+.section-3{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    height: 100vh;
+}
+.secao1{
+  background-color: #241bbf;
+}
+
+.secao2{
+  background-color: #4327d3;
+}
+
+.secao3{
+  background-color: #a579ff;
+}
 
     </style>
 </head>
 <body class="container">
+  <div id="bg-particles"></div>
+
 <section class="section-1">
   <div class="image-container">
     <img src="imgrep/PNG/LOGO BRANCO SEM FUNDO.png" class="imagem-fixa" />
@@ -118,16 +172,181 @@ background-image: linear-gradient(to left top, #0c0819, #12143f, #131968, #161d9
     </h1>
   <!-- <p class="texto-oculto">Somos uma equipe apaixonada por transformar ideias em experiências digitais reais. De sites institucionais a aplicativos completos, criamos soluções sob medida que unem tecnologia, design e performance. Nosso código não só resolve problemas — ele constrói o futuro da sua marca. Conectamos criatividade e inovação para levar seu projeto ao próximo nível.</p> -->
 </section>
+<section class="section-3">
+</section>
+
+
+  <!-- <section style="position: relative; z-index: 1; color: white; padding: 100px;">
+    <h1>Meu Site com Partículas!</h1>
+  </section> -->
+
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+
+<!-- PARTICULAS QUE SE JUNTAM -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script> -->
+<script>
+  
+</script>
 <script>
  document.addEventListener("DOMContentLoaded", (event) => {
- 
+  // tsParticles.load("bg-particles", {
+  //  fullScreen: { enable: true, zIndex: -1 },
+  //  fpsLimit: 60,
+  // background: { color: "#0c0819" },
+  // particles: {
+  //   number: { value: 400 },
+  //   color: { value: "#ffffff" },
+  //   shape: { type: "circle" },
+  //   size: { 
+  //     value: 1.5,
+  //     random: true,  // Tamanho variável
+  //     anim: {
+  //       enable: true,
+  //       speed: 4,
+  //       size_min: 0.3
+  //     }
+  //   },
+  //   opacity: { value: 0.7 },
+  //   move: {
+  //     enable: true,
+  //     speed: 0.2,
+  //     direction: "none",
+  //     straight: false,
+  //     outModes: { default: "out" }
+  //   }
+  // },
+  // interactivity: {
+  //   events: {
+  //     onHover: { enable: true },
+  //     resize: true,
+  //     onScroll: {
+  //     enable: false,        // ativa com scroll (opcional)
+  //     direction: "down",    // "up" ou "down"
+  //     mode: "hide"          // ou "none"
+  //   }
+  //   }
+  // }
 
+
+
+
+
+
+
+
+
+tsParticles.load("bg-particles", {
+  fullScreen: { enable: true, zIndex: -1 },
+  fpsLimit: 60,
+  background: { color: "#0c0819" },
+  particles: {
+    number: { value: 400 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    size: { 
+      value: 1.5,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 4,
+        size_min: 0.3
+      }
+    },
+    opacity: { value: 0.7 },
+    move: {
+      enable: true,
+      speed: 0.5,
+      direction: "none",
+      straight: false,
+      outModes: { default: "out" }
+    }
+  },
+  interactivity: {
+    events: {
+      onHover: { 
+        enable: true,
+        // mode: "grab",
+        parallax: {
+          enable: true,
+          force: 20,  // Força do efeito parallax (pode ajustar)
+          smooth: 10  // Suavidade do movimento (pode ajustar)
+        }
+      },
+      resize: true,
+      onScroll: {
+        enable: false,
+        direction: "down",
+        mode: "hide"
+      }
+    },
+    
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  });
+
+
+
+
+
+
+
+
+
+
+
+//  <!-- PARTICULAS QUE SE JUNTAM -->
+//  tsParticles.load("bg-particles", {
+//     fullScreen: {
+//       enable: false, // desativa modo full se usarmos uma div
+//       zIndex: -1
+//     },
+//     background: {
+//       color: "#000000"
+//     },
+//     particles: {
+//       number: { value: 60 },
+//       color: { value: "#ffffff" },
+//       size: { value: 2 },
+//       move: { enable: true, speed: 1 },
+//       links: {
+//         enable: true,
+//         distance: 120,
+//         color: "#ffffff",
+//         opacity: 0.4
+//       }
+//     },
+//     interactivity: {
+//       events: {
+//         onHover: { enable: true, mode: "repulse" },
+//         resize: true
+//       },
+//       modes: {
+//         repulse: { distance: 100 }
+//       }
+//     }
+//   });
 //   gsap.to(".divTeste2",{
 //     scrollTrigger:{
 //         trigger:".divTeste2",
@@ -158,10 +377,15 @@ background-image: linear-gradient(to left top, #0c0819, #12143f, #131968, #161d9
 //   })
 
 
+ gsap.registerPlugin(ScrollTrigger)
 
 
- });
 
+
+ 
+
+
+ 
   gsap.to(".animated-text span", {
     opacity: 1,
     y: 0,
@@ -189,7 +413,6 @@ background-image: linear-gradient(to left top, #0c0819, #12143f, #131968, #161d9
 
 
 
- gsap.registerPlugin(ScrollTrigger)
   // gsap code here!
     gsap.to(".imagem-fixa", {
       scale: 2, // dobra o tamanho
@@ -216,6 +439,7 @@ gsap.to(".texto-oculto", {
 });
 
 
+//  });
 
 
 </script>
